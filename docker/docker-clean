@@ -1,10 +1,21 @@
 #!/bin/bash
 
-line=`docker ps -a | grep "Exited" | awk -F ' ' '{print $1}'`
+#clean exited container
+ids=`docker ps -a | grep "Exited" | awk -F ' ' '{print $1}'`
 
-for container_id in $line;
+for container_id in $ids;
 do
   echo "Delete" $container_id
   docker stop $container_id
   docker rm $container_id
 done
+
+#clean unused images
+images=`docker images | grep "none" | awk -F ' ' '{print $3}'`
+
+
+for image_id in $images
+do
+   echo "Delete" $image_id
+   docker rmi $image_id
+done 
