@@ -16,9 +16,12 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
 RUN mkdir /share && chmod a+rw /share
 
 COPY smb.conf /etc/samba/smb.conf
+COPY samba.sh /samba.sh
+RUN chmod a+x /samba.sh
 
 VOLUME ["/etc/samba"]
 VOLUME ["/share"]
 
 EXPOSE 137/udp 138/udp 139 445
-CMD ["smbd", "-FS"]
+
+CMD ["/samba.sh"]
