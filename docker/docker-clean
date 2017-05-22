@@ -1,0 +1,10 @@
+#!/bin/bash
+
+line=`docker ps -a | grep "Exited" | awk -F ' ' '{print $1}'`
+
+for container_id in $line;
+do
+  echo "Delete" $container_id
+  docker stop $container_id
+  docker rm $container_id
+done
