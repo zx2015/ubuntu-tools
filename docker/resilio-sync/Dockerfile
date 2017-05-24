@@ -24,7 +24,7 @@ COPY resilio.sh /resilio.sh
 RUN chmod a+x /resilio.sh
 RUN mkdir -p /var/run/resilio-sync
 
-VOLUME /var/lib/resilio-sync
+VOLUME /sync
 EXPOSE 8888
 
 CMD ["/resilio.sh"]

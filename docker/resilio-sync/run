@@ -3,4 +3,4 @@
 docker stop resilio-sync
 docker rm resilio-sync
 
-docker run -d --restart=always --name=resilio-sync --hostname=resilio-sync -p 8888:8888 resilio-sync
+docker run -d --restart=always --name=resilio-sync --hostname=resilio-sync -p 8888:8888 -p 3128:3128 -v /media/data:/sync resilio-sync
