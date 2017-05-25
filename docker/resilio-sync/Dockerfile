@@ -14,10 +14,12 @@ COPY resilio-sync.list /etc/apt/sources.list.d/resilio-sync.list
 
 RUN wget -qO - https://linux-packages.resilio.com/resilio-sync/key.asc | apt-key add - && \
     apt-get update -qq && \
-    apt-get install -qqy resilio-sync && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
+COPY rslsync /usr/bin/rslsync
+RUN mkdir /etc/resilio-sync
+RUN mkdir /var/lib/resilio-sync
 COPY config.json /etc/resilio-sync/config.json
 COPY resilio.sh /resilio.sh
 
