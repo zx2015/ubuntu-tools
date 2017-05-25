@@ -1,0 +1,14 @@
+#!/bin/bash
+
+docker stop nginx-www
+docker rm nginx-www
+
+docker run --name="nginx-www" --hostname="nginx-www" \
+      -d --restart=always \
+      -v /media/nginx:/etc/nginx \
+      -v /media/nginx/log:/var/log/nginx/log \
+      -v /media/data:/download \
+      --link resilio-sync:resilio \
+      --link photoshow:photoshow \
+      --link httpd:download \
+      -p 80:80 nginx:latest
