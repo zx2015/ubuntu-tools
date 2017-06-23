@@ -1,0 +1,6 @@
+#!/bin/bash
+
+docker stop rsync
+docker rm rsync
+
+docker run -it --restart=always --name=rsync --hostname=rsync -p 873:873 rsync /bin/bash
