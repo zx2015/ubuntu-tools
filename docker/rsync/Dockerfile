@@ -15,14 +15,13 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
 
 RUN mkdir /share && chmod a+rw /share
 
-COPY rsyncd.conf /etc/rsyncd.conf
+COPY rsyncd.conf /config/rsyncd.conf
+COPY rsyncd.secrets /config/rsyncd.secrets
 COPY rsync.sh /rsync.sh
-RUN chmod a+x /rsync.sh && \
-    touch /etc/rsyncd.secrets && \
-    chmod 600 /etc/rsyncd.secrets
+RUN chmod a+x /rsync.sh
 
-VOLUME ["/etc/samba"]
-VOLUME ["/share"]
+VOLUME ["/config"]
+VOLUME ["/backup"]
 
 EXPOSE 873
 
