@@ -1,0 +1,6 @@
+#!/bin/bash
+
+docker stop debian
+docker rm debian
+
+docker run -it --name=debian --hostname=debian debian:stretch

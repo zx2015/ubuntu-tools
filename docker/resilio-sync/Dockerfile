@@ -1,9 +1,5 @@
 FROM debian:stretch
-MAINTAINER Zhou Xin <xin.3.zhou@nokia.com>
-
-ENV ftp_proxy=http://10.144.1.10:8080/
-ENV http_proxy=http://10.144.1.10:8080/
-ENV https_proxy=http://10.144.1.10:8080/
+MAINTAINER Zhou Xin <xin.zhou.hziee@hotmail.com>
 	
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get update -qq  && \
