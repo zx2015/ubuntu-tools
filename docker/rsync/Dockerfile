@@ -1,9 +1,9 @@
 FROM debian:stretch
 MAINTAINER Zhou Xin <xin.zhou.hziee@hotmail.com>
 
-ENV ftp_proxy=http://10.144.1.10:8080/
-ENV http_proxy=http://10.144.1.10:8080/
-ENV https_proxy=http://10.144.1.10:8080/
+ENV ftp_proxy=http://10.158.100.1:8080/
+ENV http_proxy=http://10.158.100.1:8080/
+ENV https_proxy=http://10.158.100.1:8080/
 
 
 RUN export DEBIAN_FRONTEND='noninteractive' && \
@@ -12,8 +12,6 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get install -qqy rsync && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
-
-RUN mkdir /share && chmod a+rw /share
 
 COPY rsyncd.conf /config/rsyncd.conf
 COPY rsyncd.secrets /config/rsyncd.secrets
