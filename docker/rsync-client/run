@@ -1,0 +1,7 @@
+#!/bin/bash
+
+docker stop rsync-client
+docker rm rsync-client
+
+docker run -d --restart=always --name=rsync-client --hostname=rsync-client rsync-client
+#docker run -it --restart=always --name=rsync-client --hostname=rsync-client rsync-client /bin/bash
