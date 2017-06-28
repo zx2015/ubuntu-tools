@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+import socket
+
+BUFFER_SIZE = 1024 # Normally 1024, but we want fast response
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind(('', 8899))
+s.listen(1)
+
+logfile="/var/log/ipreg.log"
+f = open(logfile, "w")
+
+while 1:
+    conn, addr = s.accept()
+    data = conn.recv(BUFFER_SIZE)
+    if not data: break
+    print "Connection Address:", addr, "INFO:", data
+    f = open(logfile, "w+")
+    f.write("Connection Address: "+data)
+    f.close()
+    conn.send("IP registed")
+
+conn.close()
