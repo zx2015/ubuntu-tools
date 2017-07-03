@@ -4,21 +4,17 @@ import socket
 import os
 
 BUFFER_SIZE = 1024 # Normally 1024, but we want fast response
-logfile="/var/log/ipreg.log"
 
+logfile="/var/log/ipregd.log"
+
+#check if logfile existing, if yes, delete it
 if ( os.path.isfile(logfile) ):
     #delete existing log file
     os.remove(logfile)
 
 try:
-    logfile="/var/log/ipreg.log"
-    f = open(logfile, "w")
-except:
-    print "Create file failed!"
-
-try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind(('', 110))
+    s.bind(('', 8890))
     s.listen(5)
 
     while 1:
@@ -28,7 +24,12 @@ try:
         print "Connection Address:", addr, "INFO:", data
         conn.send("IP registed")
         conn.close()
+
+        #write log file
+        f = open(logfile, 'a+')
+        f.write("Connection Address: "+data+"\n")
+        f.close()
 except:
      print "socket failure!"
-     f.close()
      s.close()
+     exit(0)
