@@ -1,0 +1,12 @@
+#!/bin/bash
+
+kernel_list=`rpm -q kernel-core`
+
+cur=`uname -r`
+
+for k in $kernel_list;
+do
+    if [ -z `echo $k | grep $cur` ];then
+       yum remove -y $k
+    fi
+done
