@@ -1,0 +1,14 @@
+#!/usr/bin/python
+
+import os
+import shutil
+
+for root, dirs, files in os.walk("/media/data/Family-Photo", topdown=False):
+    for name in files:
+        if name == ".picasa.ini":
+            print(os.path.join(root,name))
+            os.remove(os.path.join(root,name))
+    for folder in dirs:
+        if folder in [ "@eaDir", ".sync"]:
+            print (os.path.join(root,folder))
+            shutil.rmtree(os.path.join(root,folder))
