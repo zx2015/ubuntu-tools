@@ -14,8 +14,8 @@ def get_ip_address(ifname):
     )[20:24])
 
 
-TCP_IP = '127.0.0.1'
-TCP_PORT = 8899
+TCP_IP = '10.181.45.226'
+TCP_PORT = 8890
 
 BUFFER_SIZE = 1024
 
