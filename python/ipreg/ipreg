@@ -3,7 +3,7 @@
 import socket
 import fcntl
 import struct
-
+import etcd
 
 def get_ip_address(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -13,18 +13,13 @@ def get_ip_address(ifname):
         struct.pack('256s', ifname[:15])
     )[20:24])
 
+#ipaddr = ' enp0s25 ' + get_ip_address('enp0s25')
 
-TCP_IP = '10.181.45.226'
-TCP_PORT = 8890
+ipaddr=socket.gethostbyname_ex(socket.gethostname())
 
-BUFFER_SIZE = 1024
+client = etcd.Client('10.181.40.142', port=4001)
 
-MESSAGE = socket.gethostname() + ' ' + get_ip_address('enp0s25')
+key='service_dis/' + socket.gethostname()
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((TCP_IP, TCP_PORT))
-s.send(MESSAGE)
-data = s.recv(BUFFER_SIZE)
-s.close()
+client.write(key,ipaddr,ttl=60)
 
-print "received data:", data

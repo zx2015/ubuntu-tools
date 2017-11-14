@@ -1,3 +1,9 @@
 #!/bin/bash
 
+wget https://download-cdn.resilio.com/stable/linux-x64/resilio-sync_x64.tar.gz
+
+tar xzfv resilio-sync_x64.tar.gz
+
+rm -f resilio-sync_x64.tar.gz
+
 docker build -t resilio-sync .
