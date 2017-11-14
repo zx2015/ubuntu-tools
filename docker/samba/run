@@ -3,4 +3,4 @@
 docker stop samba
 docker rm samba
 
-docker run -d --restart=always --name=samba --hostname=samba -p 137:137 -p 138:138 -p 139:139 -p 445:445 samba
+docker run -d --restart=always --name=samba --hostname=samba -v /media/data:/share -p 137:137 -p 138:138 -p 139:139 -p 445:445 samba

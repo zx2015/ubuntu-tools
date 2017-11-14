@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+
+import socket
+import fcntl
+import struct
+import etcd
+
+ipaddr=socket.gethostbyname_ex(socket.gethostname())
+
+client = etcd.Client('10.181.40.142', port=4001)
+
+key='service_dis/' + ipaddr[0]
+
+msg=ipaddr[0]
+for ip in ipaddr[2]:
+  msg=msg+" "+ip
+
+client.write(key,msg,ttl=120)
+
